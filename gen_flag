@@ -1,0 +1,16 @@
+#! /bin/bash
+
+cd /root/
+
+pip install cryptography
+
+flag=$1
+key=`python p01.py`
+enc_flag=`python p02.py $flag $key`
+
+sed -i 's/this_is_the_key_being_replaced/'$key'/g' cryptic_algo.py
+touch space_is_here
+echo $enc_flag >> space_is_here
+
+cp cryptic_algo /app
+cp space_is_here /app
